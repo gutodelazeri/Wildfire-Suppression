@@ -90,7 +90,7 @@ def PrintSolution(OutputFile, ZSol, G, Ignitions, H, Delay, gridDimension):
         '0': 'black',
         ' ': 'white'
     }
-    Nodes = set(G.keys())
+    xy_coord_to_z = {(x, y): z for x, y, z in G.keys()}
     if len(ZSol) == 0:
         HasResource = set()
     else:
@@ -103,12 +103,18 @@ def PrintSolution(OutputFile, ZSol, G, Ignitions, H, Delay, gridDimension):
     for i in range(gridDimension):
         row = []
         for j in range(gridDimension):
-            if (i, j) in Ignitions:
+            if (i, j, xy_coord_to_z[(i, j)]) not in G:
+                vertex = None
+            else:
+                vertex = (i, j, xy_coord_to_z[(i, j)])
+            if vertex is None:
+                row.append(".")
+            elif vertex in Ignitions:
                 row.append("#")
-            elif (i, j) in HasResource:
+            elif vertex in HasResource:
                 row.append('0')
                 firebreak_coords.append((i, j))
-            elif (i, j) in Nodes and ArrivalTime[(i, j)] < H:
+            elif ArrivalTime[vertex] < H:
                 row.append("x")
             else:
                 row.append(".")

@@ -488,7 +488,7 @@ class Instance:
             v_z = Z[(v_x, v_y)]
             data["distance"]["coordinates"].append([self.d * v_x, self.d * v_y, v_z])
         with open(f"{inst_name}.json", 'w') as f:
-            json.dump(data, f)
+            json.dump(data, f, indent=4)
         return V, A, Z, T, H, resources_dist, fire_arrival_times, ignition_vertex
                 
 
@@ -498,7 +498,7 @@ class Animation:
         pass
 
     @staticmethod
-    def run_animation(V, Z, fire_arrival_times, free_burning_time, wind_direction, save_as_gif=False, gif_duration=10, gif_filename="fire_animation.gif", elev_angle=30, azim_angle=45):
+    def run_animation(V, Z, fire_arrival_times, free_burning_time, wind_direction, save_as_gif=False, gif_duration=20, gif_filename="fire_animation.gif", elev_angle=30, azim_angle=45):
         fig = plt.figure(figsize=(10, 8))
         ax = fig.add_subplot(111, projection='3d')
 
@@ -511,8 +511,9 @@ class Animation:
         bars = ax.bar3d(x, y, np.zeros_like(z), 1, 1, z, shade=True, color='green')
 
         # Set up the slider for controlling time
-        ax_time = plt.axes([0.25, 0.02, 0.50, 0.03], facecolor='lightgoldenrodyellow')
-        slider = Slider(ax_time, 'Time', 0, free_burning_time, valinit=0, valstep=0.1)
+        if not save_as_gif:
+            ax_time = plt.axes([0.25, 0.02, 0.50, 0.03], facecolor='lightgoldenrodyellow')
+            slider = Slider(ax_time, 'Time', 0, free_burning_time, valinit=0, valstep=0.1)
 
         # Wind direction arrow
         wind_origin = [np.mean(x), np.mean(y)]  # Center the arrow at the grid
@@ -546,15 +547,15 @@ class Animation:
             #ax.view_init(elev=elev_angle, azim=azim_angle)
 
         # Call update function when slider value changes
-        slider.on_changed(update)
+        if not save_as_gif:
+            slider.on_changed(update)
 
         # Initial plot
         update(0)
 
         # If save_as_gif is True, create the animation and save it as a gif
-        my_file = Path(gif_filename)
-        if save_as_gif and not my_file.is_file():
-            frames_per_second = 1
+        if save_as_gif:
+            frames_per_second = 2
             total_frames = frames_per_second * gif_duration
             times = np.linspace(0, free_burning_time, total_frames)
             def update_for_gif(frame_idx):
@@ -585,6 +586,7 @@ def parse_args():
     parser.add_argument("--last_res_time", type=str, default="VeryLate", help="Last release time.")
     parser.add_argument("--seed", type=int, default=123, help="Seed value.")
     parser.add_argument("--save_as_gif", action='store_true', help="Save the animation as a GIF.")
+    parser.add_argument("--gif_duration", type=int, default=15, help="Duration of the GIF in seconds.")
 
     return parser.parse_args()
 
@@ -599,7 +601,7 @@ def main():
     # Create animation
     animation = Animation()   
     gif_name = f'{args.grid}_{args.slope}_{args.wind}_{args.seed}' 
-    animation.animation(V, A, T, Z, ignition_vertex, instance.Wind_major_direction, args.save_as_gif, 10, gif_name + ".gif")
+    animation.animation(V, A, T, Z, ignition_vertex, instance.Wind_major_direction, args.save_as_gif, args.gif_duration, gif_name + ".gif")
 
 
 if __name__ == "__main__":

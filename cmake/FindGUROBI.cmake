@@ -20,7 +20,6 @@ find_path(GUROBI_INCLUDE_DIR
 
 find_library(GUROBI_LIBRARY
         NAMES
-          gurobi95
         gurobi100
         gurobi110
         gurobi120

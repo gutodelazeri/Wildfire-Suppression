@@ -43,11 +43,6 @@ include_directories(${GUROBI_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} ${SOURCE_DIR}
 # Build main
 add_executable(${CMAKE_PROJECT_NAME}  ${SOURCE_DIR}/main.cpp)
 
-
-message(STATUS "GUROBI_INCLUDE_DIRS: ${GUROBI_INCLUDE_DIRS}")
-message(STATUS "GUROBI_LIBRARY: ${GUROBI_LIBRARY}")
-message(STATUS "GUROBI_CXX_LIBRARY: ${GUROBI_CXX_LIBRARY}")
-
 # Link libraries
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE nlohmann_json::nlohmann_json 
                                                     ${GUROBI_CXX_LIBRARY} 
