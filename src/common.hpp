@@ -18,7 +18,6 @@ constexpr CAPACITY INF_CAPACITY = numeric_limits<CAPACITY>::max();
 constexpr RESOURCE INF_RESOURCE = numeric_limits<RESOURCE>::max();
 constexpr double INF_double = numeric_limits<double>::max();
 
-
 // https://github.com/AlexGliesch/critical-coloring/blob/master/src/util.h
 struct ff {
   static constexpr double EPS = 1e-4;
