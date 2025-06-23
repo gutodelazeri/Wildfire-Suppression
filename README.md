@@ -21,7 +21,7 @@ My work tackles a combinatorial optimization coming from the context of decision
 Given a vertex $s \in V$ representing an ignition, we can approximate fire spread dynamics over the original landscape by computing the shortest-path tree rooted at the ignition vertex. There is [literature](https://cdnsciencepub.com/doi/10.1139/x02-068) arguing that, if the fire propagation times on the arcs are well estimated, then the shortest-path tree provides a good approximation of the real dynamics. If we take vertex $s$ as the ignition in the example above, and we assume it burns at time $0$, then we obtain the following shortest-path tree. Notice that the figure shows the fire arrival time at each vertex. 
 
 <center>
- <img src='assets/tree.png' width='80%'/>
+ <img src='assets/tree.png' width='20%'/>
 </center>
 
 Now suppose we have a set $R$ of firefighting resources, such as helicopters or a crew of [smokejumpers](https://en.wikipedia.org/wiki/Smokejumper). Each resource $i \in R$ can be allocated to a vertex $v \in V$, to introduce a delay $\Delta$ on the outgoing arcs of vertex $v$. You can think of allocating a resource to a vertex as dropping water over the cell represented by the vertex, or razing its flammable content. The delay $\Delta$ introduced by a resource will cause a local slowdown in fire propagation, and we hope that the fire arrival time at some vertices will increase. The figure below shows an example where we have three resources available and the delay $\Delta$ is 2. In the figure, the resources are allocated to vertices $v_2$, $v_4$, and $v_6$. Notice how the graph is updated with the delays $\Delta$. The figure on the right depicts the new shortest-path tree. Notice how the fire arrival time at vertices $v_5$, $v_7$, and $v_8$ increased two time units each. 
@@ -116,7 +116,7 @@ python3 scripts/visualize_solution.py --instance_path Small_Moderate_Light_High_
 The GIF below illustrates the visualization. At any time point, the ignition cell is painted in black, cells reached by the fire are painted in red, protected cells are painted in blue, and the remaining cells are painted in red.
 
 <center>
- <img src='assets/sol_ibs_Medium_Moderate_Light_High_Moderate_Moderate_Early_VeryLate_10_1.gif' width='50%' />
+ <video src='assets/sol_ibs_Medium_Moderate_Light_High_Moderate_Moderate_Early_VeryLate_10_1.mp4' width='50%' />
 </center>
 
 ## 6. How to cite <a name="citing"></a>
