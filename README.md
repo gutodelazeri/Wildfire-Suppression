@@ -98,7 +98,7 @@ The script ```visualize_solution.py``` creates visualizations of a solution. It 
 There are two visualization modes. The static mode depicts the state of the grid at the optimization horizon. The ignition cell is painted red, burned cells are painted orange, protected cells are painted black, and saved cells are painted white. Run the following line in your terminal to create a static visualization of the solution produced in the last section.
 
 ```bash
-python3 scripts/visualize_solution.py --instance_path Small_Moderate_Light_High_Moderate_Moderate_Early_VeryLate_10.json --solution_path sol_ibs_Small_Moderate_Light_High_Moderate_Moderate_Early_VeryLate_10_1.json --mode static
+python3 scripts/visualize_solution.py --instance_path Medium_Moderate_Light_High_Moderate_Moderate_Early_VeryLate_10.json --solution_path sol_ibs_Medium_Moderate_Light_High_Moderate_Moderate_Early_VeryLate_10_1.json --mode static
 ```
 
 The figure below illustrates the best solution found by beam search within 300 seconds. 
@@ -110,7 +110,7 @@ The figure below illustrates the best solution found by beam search within 300 s
 The script also supports a dynamic visualization mode, in which the grid is represented in three-dimensional space, and a slider allows you to move forward or backward in time. To run a dynamic visualization, type the following:
 
 ```bash
-python3 scripts/visualize_solution.py --instance_path Small_Moderate_Light_High_Moderate_Moderate_Early_VeryLate_10.json --solution_path sol_ibs_Small_Moderate_Light_High_Moderate_Moderate_Early_VeryLate_10_1.json --mode dynamic
+python3 scripts/visualize_solution.py --instance_path Medium_Moderate_Light_High_Moderate_Moderate_Early_VeryLate_10.json --solution_path sol_ibs_Medium_Moderate_Light_High_Moderate_Moderate_Early_VeryLate_10_1.json --mode dynamic
 ```
 
 The video below illustrates the visualization. At any point in time, the ignition cell is painted black, cells reached by the fire are painted red, protected cells are painted blue, and the remaining cells are painted green.
