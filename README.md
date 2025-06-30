@@ -21,7 +21,7 @@ My work tackles a combinatorial optimization coming from the context of decision
 Given a vertex $s \in V$ representing an ignition, we can approximate fire spread dynamics over the original landscape by computing the shortest-path tree rooted at the ignition vertex. There is [literature](https://cdnsciencepub.com/doi/10.1139/x02-068) arguing that, if the fire propagation times on the arcs are well estimated, then the shortest-path tree provides a good approximation of the real dynamics. If we take vertex $s$ as the ignition in the example above, and we assume it burns at time $0$, then we obtain the following shortest-path tree. Notice that the figure shows the fire arrival time at each vertex. 
 
 <p align="center">
- <img src='assets/tree.png' width='55%'/>
+ <img src='assets/tree.png' width='25%'/>
 </p>
 
 Now suppose we have a set $R$ of firefighting resources, such as helicopters or a crew of [smokejumpers](https://en.wikipedia.org/wiki/Smokejumper). Each resource $i \in R$ can be allocated to a vertex $v \in V$, to introduce a delay $\Delta$ on the outgoing arcs of vertex $v$. You can think of allocating a resource to a vertex as dropping water over the cell represented by the vertex, or razing its flammable content. The delay $\Delta$ introduced by a resource will cause a local slowdown in fire propagation, and we hope that the fire arrival time at some vertices will increase. The figure below shows an example where we have three resources available and the delay $\Delta$ is 2. In the figure, the resources are allocated to vertices $v_2$, $v_4$, and $v_6$. Notice how the graph is updated with the delays $\Delta$. The figure on the right depicts the new shortest-path tree. Notice how the fire arrival time at vertices $v_5$, $v_7$, and $v_8$ increased two time units each. 
@@ -98,7 +98,7 @@ The script ```visualize_solution.py``` creates visualizations of a solution. It 
 There are two visualization modes. The static mode depicts the state of the grid at the optimization horizon. The ignition cell is painted red, burned cells are painted orange, protected cells are painted black, and saved cells are painted white. Run the following line in your terminal to create a static visualization of the solution produced in the last section.
 
 ```bash
-python3 scripts/visualize_solution.py --instance_path Small_Moderate_Light_High_Moderate_Moderate_Early_VeryLate_10.json --solution_path sol_ibs_Small_Moderate_Light_High_Moderate_Moderate_Early_VeryLate_10_1.json --mode static
+python3 scripts/visualize_solution.py --instance_path Medium_Moderate_Light_High_Moderate_Moderate_Early_VeryLate_10.json --solution_path sol_ibs_Medium_Moderate_Light_High_Moderate_Moderate_Early_VeryLate_10_1.json --mode static
 ```
 
 The figure below illustrates the best solution found by beam search within 300 seconds. 
@@ -110,7 +110,7 @@ The figure below illustrates the best solution found by beam search within 300 s
 The script also supports a dynamic visualization mode, in which the grid is represented in three-dimensional space, and a slider allows you to move forward or backward in time. To run a dynamic visualization, type the following:
 
 ```bash
-python3 scripts/visualize_solution.py --instance_path Small_Moderate_Light_High_Moderate_Moderate_Early_VeryLate_10.json --solution_path sol_ibs_Small_Moderate_Light_High_Moderate_Moderate_Early_VeryLate_10_1.json --mode dynamic
+python3 scripts/visualize_solution.py --instance_path Medium_Moderate_Light_High_Moderate_Moderate_Early_VeryLate_10.json --solution_path sol_ibs_Medium_Moderate_Light_High_Moderate_Moderate_Early_VeryLate_10_1.json --mode dynamic
 ```
 
 The video below illustrates the visualization. At any point in time, the ignition cell is painted black, cells reached by the fire are painted red, protected cells are painted blue, and the remaining cells are painted green.
