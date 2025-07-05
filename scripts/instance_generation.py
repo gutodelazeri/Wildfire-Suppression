@@ -419,11 +419,10 @@ class Instance:
         fat_dist = [fire_arrival_times[u] for u in V if fire_arrival_times[u] < math.inf]
         q_start, q_end   = (np.quantile(fat_dist, p) for p in [self.Resources_quantile_lb, self.Resources_quantile_ub])
         resources = []
-        # Number of resources per decision point
         k = self.Resources_num_resources
         T = self.Resources_decision_points
-        res_distribution = [1] * T
-        remaining = k - T
+        res_distribution = [0] * T
+        remaining = k
         i = 0
         while remaining > 0:
             res_distribution[i % T] += 1
@@ -431,6 +430,8 @@ class Instance:
             i += 1
         rd.shuffle(res_distribution)
         for idx, t in enumerate(np.linspace(q_start, q_end, self.Resources_decision_points).tolist()):
+            if res_distribution[idx] == 0:
+                continue
             res = generate_resource()
             res["t"] = round(t, self.precision)
             res["c"] = res_distribution[idx]
